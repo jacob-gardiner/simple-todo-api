@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTodoRequest;
 use App\Http\Requests\UpdateTodoRequest;
+use App\Http\Resources\TodoCollection;
 use App\Http\Resources\TodoResource;
 use App\Models\Todo;
 use Exception;
@@ -18,7 +19,7 @@ class TodosController extends Controller
      */
     public function index()
     {
-        return response()->json(Todo::all());
+        return response()->json(new TodoCollection(Todo::all()));
     }
 
     /**
@@ -33,7 +34,7 @@ class TodosController extends Controller
             'title' => $request->title
         ]);
 
-        return response()->json($todo);
+        return response()->json(new TodoResource($todo));
     }
 
     /**
@@ -61,7 +62,7 @@ class TodosController extends Controller
             'completed_at' => $request->completed ? now()->toDateTimeString() : null,
         ]);
 
-        return response()->json($todo);
+        return response()->json(new TodoResource($todo));
     }
 
     /**
