@@ -1,0 +1,7 @@
+app:
+  port: 8080
+database:
+  engine: mysql
+  name: simple_todo
+  password: secret
+  port: 33061
